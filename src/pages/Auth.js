@@ -1,15 +1,15 @@
 import { useState, useRef, useContext } from "react";
-//import { useHistory } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 //import AuthContext from "../Store/Auth-context";
 
 import classes from "./Auth.module.css";
 
 const Auth = () => {
-  //const history = useHistory("");
+  const history = useHistory("");
   const enteredEmail = useRef("");
   const enteredPassword = useRef("");
   const conformPassword = useRef("");
-  const [isLogin, setIsLogin] = useState(false);
+  const [isLogin, setIsLogin] = useState(true);
   const [isLoading, setIsLoading] = useState(false);
 
   //const Authctx = useContext(AuthContext);
@@ -40,10 +40,11 @@ const Auth = () => {
       );
       const data = await responsee.json();
       //Authctx.login(data.idToken);
+      //console.log(data);
 
       setIsLoading(false);
       if (responsee.ok) {
-        //history.replace("/");
+        history.replace("/home");
       } else {
         let errorMessage = "Authenication failed";
         alert(errorMessage);
@@ -66,7 +67,7 @@ const Auth = () => {
         }
       );
       const data = await response.json();
-      console.log(data);
+
       if (response.ok) {
       } else {
         let errorMessage = "Authenication failed";
