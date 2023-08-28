@@ -1,6 +1,6 @@
 import { useState, useRef, useContext } from "react";
 import { useHistory } from "react-router-dom";
-//import AuthContext from "../Store/Auth-context";
+import AuthContext from "../store/AuthContext";
 
 import classes from "./Auth.module.css";
 
@@ -12,7 +12,7 @@ const Auth = () => {
   const [isLogin, setIsLogin] = useState(true);
   const [isLoading, setIsLoading] = useState(false);
 
-  //const Authctx = useContext(AuthContext);
+  const Authctx = useContext(AuthContext);
 
   const switchAuthModeHandler = () => {
     setIsLogin((prevState) => !prevState);
@@ -39,7 +39,7 @@ const Auth = () => {
         }
       );
       const data = await responsee.json();
-      //Authctx.login(data.idToken);
+      Authctx.login(data.idToken);
       //console.log(data);
 
       setIsLoading(false);
