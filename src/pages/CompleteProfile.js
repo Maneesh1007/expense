@@ -1,11 +1,13 @@
 import { useContext, useRef, useEffect, useState } from "react";
 import AuthContext from "../store/AuthContext";
+import { useHistory } from "react-router-dom";
 
 const CompleteProfile = () => {
   const Authctx = useContext(AuthContext);
   const nameRef = useRef("");
   const profilePhotoRef = useRef("");
   const [profileData, setProfileData] = useState({});
+  const history = useHistory("");
 
   useEffect(() => {
     const fetchProfileData = async () => {
@@ -22,8 +24,13 @@ const CompleteProfile = () => {
         }
       );
 
+      if (!response.ok) {
+        console.log("Error fetching profile data");
+        return;
+      }
+
       const data = await response.json();
-      console.log(data.displayName);
+      console.log(data);
       setProfileData(data); // Set the profile data in the state
     };
 
@@ -52,10 +59,17 @@ const CompleteProfile = () => {
 
     const data = await response.json();
   };
+  const logoutHandler = () => {
+    Authctx.logout();
+    history.replace("/");
+  };
   return (
     <>
       <div className="justify-content-center">
         <h1>Contact Details</h1>
+        <div className="justify-content-end">
+          <button onClick={logoutHandler}>Logout</button>
+        </div>
         <button>Close</button>
       </div>
       <form onSubmit={submitHandler}>
