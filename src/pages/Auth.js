@@ -80,6 +80,11 @@ const Auth = () => {
     }
   };
 
+  //forgot Password
+  const passwordHandler = () => {
+    history.replace("/forgot");
+  };
+
   return (
     <section className={classes.auth}>
       {<h1>{isLogin ? "Login" : "Sign Up"}</h1>}
@@ -96,6 +101,9 @@ const Auth = () => {
         <div className={classes.control}>
           <label htmlFor="password">Conform Password</label>
           <input type="password" id="password" ref={conformPassword} required />
+        </div>
+        <div className={classes.control}>
+          <button onClick={passwordHandler}>Forgot Password?</button>
         </div>
 
         <div className={classes.actions}>
