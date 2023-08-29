@@ -44,7 +44,7 @@ const Auth = () => {
 
       setIsLoading(false);
       if (responsee.ok) {
-        history.replace("/home");
+        history.replace("/expense");
       } else {
         let errorMessage = "Authenication failed";
         alert(errorMessage);

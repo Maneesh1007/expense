@@ -3,6 +3,7 @@ import Auth from "./pages/Auth";
 import Home from "./pages/Home";
 import CompleteProfile from "./pages/CompleteProfile";
 import ForgotPassword from "./components/ForgotPassword";
+import ExpenseTracker from "./components/ExpenseTracker";
 
 function App() {
   return (
@@ -19,6 +20,9 @@ function App() {
         </Route>
         <Route path="/forgot" exact>
           <ForgotPassword></ForgotPassword>
+        </Route>
+        <Route path="/expense">
+          <ExpenseTracker></ExpenseTracker>
         </Route>
       </Switch>
     </>
