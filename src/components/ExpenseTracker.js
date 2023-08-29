@@ -10,11 +10,6 @@ const ExpenseTracker = () => {
   const submitHandler = async (e) => {
     e.preventDefault();
 
-    const Expense = {
-      amount: amountRef.current.value,
-      desc: descRef.current.value,
-      category: categoryRef.current.value,
-    };
     const response = await fetch(
       "https://expense-tracker-bef01-default-rtdb.firebaseio.com/expenses.json",
       {
@@ -30,8 +25,14 @@ const ExpenseTracker = () => {
       }
     );
     const data = await response.json();
-    console.log(data);
+    const Expense = {
+      amount: amountRef.current.value,
+      desc: descRef.current.value,
+      category: categoryRef.current.value,
+      name: data.name,
+    };
     await setItems((previtems) => [...previtems, Expense]);
+    console.log(items);
   };
 
   return (
@@ -49,7 +50,7 @@ const ExpenseTracker = () => {
         </select>
         <button>Add Expense</button>
       </form>
-      {items.length > 0 && <Display items={items} />}
+      {items.length > 0 && <Display items={items} setItems={setItems} />}
     </div>
   );
 };

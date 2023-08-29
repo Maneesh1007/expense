@@ -99,8 +99,13 @@ const Auth = () => {
           <input type="password" id="password" ref={enteredPassword} required />
         </div>
         <div className={classes.control}>
-          <label htmlFor="password">Conform Password</label>
-          <input type="password" id="password" ref={conformPassword} required />
+          <label htmlFor="cpassword">Conform Password</label>
+          <input
+            type="password"
+            id="cpassword"
+            ref={conformPassword}
+            required
+          />
         </div>
         <div className={classes.control}>
           <button onClick={passwordHandler}>Forgot Password?</button>
