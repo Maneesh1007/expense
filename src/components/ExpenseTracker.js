@@ -15,6 +15,22 @@ const ExpenseTracker = () => {
       desc: descRef.current.value,
       category: categoryRef.current.value,
     };
+    const response = await fetch(
+      "https://expense-tracker-bef01-default-rtdb.firebaseio.com/expenses.json",
+      {
+        method: "POST",
+        body: JSON.stringify({
+          amount: amountRef.current.value,
+          desc: descRef.current.value,
+          category: categoryRef.current.value,
+        }),
+        headers: {
+          "Content-Type": "application/json",
+        },
+      }
+    );
+    const data = await response.json();
+    console.log(data);
     await setItems((previtems) => [...previtems, Expense]);
   };
 
