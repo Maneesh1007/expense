@@ -1,18 +1,22 @@
 import { useState, useRef, useContext } from "react";
 import { useHistory } from "react-router-dom";
-import AuthContext from "../store/AuthContext";
+//import AuthContext from "../store/AuthContext";
+import { useDispatch, useSelector } from "react-redux";
+import { AuthActions } from "../reducers/AuthReducer";
 
 import classes from "./Auth.module.css";
 
 const Auth = () => {
-  const history = useHistory("");
+  const history = useHistory();
   const enteredEmail = useRef("");
   const enteredPassword = useRef("");
   const conformPassword = useRef("");
   const [isLogin, setIsLogin] = useState(true);
   const [isLoading, setIsLoading] = useState(false);
 
-  const Authctx = useContext(AuthContext);
+  //const Authctx = useContext(AuthContext);
+  const isLogedin = useSelector((state) => state.isLogedin);
+  const dispatch = useDispatch();
 
   const switchAuthModeHandler = () => {
     setIsLogin((prevState) => !prevState);
@@ -39,11 +43,12 @@ const Auth = () => {
         }
       );
       const data = await responsee.json();
-      Authctx.login(data.idToken);
+      //Authctx.login(data.idToken);
       //console.log(data);
 
       setIsLoading(false);
       if (responsee.ok) {
+        dispatch(AuthActions.login(data.idToken));
         history.replace("/expense");
       } else {
         let errorMessage = "Authenication failed";
